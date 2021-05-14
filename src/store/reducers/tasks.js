@@ -1,8 +1,15 @@
-import { SET_ITEMS, SET_IS_FETCHING } from '../types/tasks'
+import queryString from 'query-string'
+import { SET_ITEMS, SET_PAGE, SET_IS_FETCHING } from '../types/tasks'
+
+const urlParams = queryString.parse(window.location.search)
 
 const initialState = {
 	tasks: [],
-	isFetching: false
+	total_task_count: null,
+	isFetching: false,
+	page: urlParams.page ? +urlParams.page : 1,
+	sort_direction: urlParams.sort_direction ? urlParams.sort_direction : 'asc',
+	sort_field: urlParams.sort_field ? urlParams.sort_field : 'id',
 }
 
 const changeState = (state, prop, value) => ({
@@ -13,7 +20,14 @@ const changeState = (state, prop, value) => ({
 const tasksReducer = (state = initialState, { type, payload }) => {
 	switch(type) {
 		case SET_ITEMS:
-			return changeState(state, 'tasks', payload)
+			return {
+				...state,
+				tasks: payload.tasks,
+				total_task_count: payload.total_task_count
+			}
+
+		case SET_PAGE:
+			return changeState(state, 'page', payload)
 
 		case SET_IS_FETCHING:
 			return changeState(state, 'isFetching', payload)

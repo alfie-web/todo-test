@@ -1,0 +1,17 @@
+@import '../../styles/vars'
+
+.Todo
+	&__list
+		border-radius: $border-radius
+		overflow: hidden
+		margin-top: 20px
+		width: 100%
+		text-align: left
+
+		td, th
+			padding: 20px 30px 
+
+	&__item
+		width: 100%
+		&:nth-child(odd)
+			background-color: $light
