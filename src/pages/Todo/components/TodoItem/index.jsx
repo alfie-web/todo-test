@@ -2,13 +2,13 @@ import React from 'react'
 
 const TodoItem = ({ id, username, email, text, status }) => {
 	return (
-		<tr className="Todo__item">
-			<td className="Todo__item-id">{id}</td>
-			<td className="Todo__item-username">{username}</td>
-			<td className="Todo__item-email">{email}</td>
-			<td className="Todo__item-text">{text}</td>
-			<td className="Todo__item-status">{status}</td>
-		</tr>
+		<div className="Todo__item">
+			<div className="Todo__item-id">{id}</div>
+			<div className="Todo__item-username">{username}</div>
+			<div className="Todo__item-email">{email}</div>
+			<div className="Todo__item-text">{text}</div>
+			<div className="Todo__item-status">{status}</div>
+		</div>
 	)
 }
 

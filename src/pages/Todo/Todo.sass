@@ -8,10 +8,32 @@
 		width: 100%
 		text-align: left
 
-		td, th
-			padding: 20px 30px 
+		&-items
+			position: relative
+			min-height: 100px
+			
+
+	&__item, &__list-header
+		display: flex
+		align-items: center
+		width: 100%
+		padding: 20px 30px 
 
 	&__item
-		width: 100%
 		&:nth-child(odd)
 			background-color: $light
+
+		&-id
+			width: 10%
+
+		&-username
+			width: 20%
+
+		&-email
+			width: 25%
+
+		&-text
+			width: 35%
+
+		&-status
+			width: 10%
