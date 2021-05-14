@@ -1,0 +1,2 @@
+export const SET_ITEMS = 'TASKS/SET_ITEMS'
+export const SET_IS_FETCHING = 'TASKS/SET_IS_FETCHING'
