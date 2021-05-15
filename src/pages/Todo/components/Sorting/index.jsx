@@ -5,7 +5,6 @@ import { setSortField, setSortDirection } from '../../../../store/actions/tasks'
 import Select from '../../../../components/Select'
 
 const Sorting = () => {
-	console.log('RENDER')
 	const dispatch = useDispatch()
 	const sort_field = useSelector(state => state.tasks.sort_field)
 	const sort_direction = useSelector(state => state.tasks.sort_direction)

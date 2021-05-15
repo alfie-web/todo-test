@@ -17,7 +17,7 @@ export default function Input({
    icon,
    title = '',
 	minVal = '',
-	maxVal = ''
+	maxVal = '',
 }) {
    return (
       <div className={clsx('Input', className)} title={title}>

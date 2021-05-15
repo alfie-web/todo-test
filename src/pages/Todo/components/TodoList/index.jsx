@@ -7,13 +7,14 @@ import { fetchTasks } from '../../../../store/actions/tasks'
 import TodoItem from '../TodoItem'
 import TodoListHeader from '../TodoListHeader'
 import Pagination from '../Pagination'
+import NewTaskForm from '../NewTaskForm'
 
 
 const TodoList = () => {
 	// console.log('RENDER')
 	const history = useHistory()
 	const dispatch = useDispatch()
-	
+
 	const tasks = useSelector(state => state.tasks.tasks)
 	const page = useSelector(state => state.tasks.page)
 	const sort_field = useSelector(state => state.tasks.sort_field)
@@ -43,6 +44,8 @@ const TodoList = () => {
 						: null
 					}
 				</div>
+
+				<NewTaskForm />
 
 				<Pagination />
 			</div>

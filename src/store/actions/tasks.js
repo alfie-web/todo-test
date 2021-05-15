@@ -6,6 +6,11 @@ const setItems = payload => ({
 	payload
 })
 
+// const addNewItem = payload => ({
+// 	type: ADD_NEW_ITEM,
+// 	payload
+// })
+
 export const setPage = payload => ({
 	type: SET_PAGE,
 	payload
@@ -51,3 +56,20 @@ export const fetchTasks = () => async (dispatch, getState) => {
 		dispatch(setIsFetching(false))
 	}
 }
+
+export const createNewTask = (formData) => async dispatch => {
+	dispatch(setIsFetching(true))
+	try {
+		const { data } = await tasksAPI.create(formData)
+
+		if (data.status === 'ok') {
+			// dispatch(addNewItem(data.message))
+			dispatch(fetchTasks())
+		}
+		
+	} catch (error) {
+		
+	} finally {
+		dispatch(setIsFetching(false))
+	}
+} 

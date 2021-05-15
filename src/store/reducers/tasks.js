@@ -1,5 +1,5 @@
 import queryString from 'query-string'
-import { SET_ITEMS, SET_PAGE, SET_IS_FETCHING, SET_SORT_FIELD, SET_SORT_DIRECTION } from '../types/tasks'
+import { SET_ITEMS, SET_PAGE, SET_IS_FETCHING, SET_SORT_FIELD, SET_SORT_DIRECTION, ADD_NEW_ITEM } from '../types/tasks'
 
 const urlParams = queryString.parse(window.location.search)
 
@@ -24,6 +24,13 @@ const tasksReducer = (state = initialState, { type, payload }) => {
 				...state,
 				tasks: payload.tasks,
 				total_task_count: payload.total_task_count
+			}
+
+		case ADD_NEW_ITEM:
+			return {
+				...state,
+				tasks: [...state.tasks, payload],
+				total_task_count: +state.total_task_count + 1
 			}
 
 		case SET_PAGE:
