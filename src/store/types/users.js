@@ -1,0 +1,2 @@
+export const SET_IS_AUTH = 'USER/SET_IS_AUTH'
+export const SET_IS_FETCHING = 'USER/SET_IS_FETCHING'
