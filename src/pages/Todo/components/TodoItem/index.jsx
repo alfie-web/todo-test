@@ -5,16 +5,17 @@ import { editTask } from '../../../../store/actions/tasks'
 import Input from '../../../../components/Input'
 import Checkbox from '../../../../components/Checkbox'
 
-const EditTextForm = ({ onBlur, text }) => {
-	const [value, setValue] = useState(text)
+const EditTextForm = memo(({ onBlur, text }) => {
+	const [value, setValue] = useState(String(text))
 
 	const blurHandler = () => {
 		if (value === text) return onBlur(null)
 		onBlur({ prop: 'text', value })
 	}
 
-	const onChangeHandler = (e) => {
-		setValue(!!e.target.value)
+	const onChange = (e) => {
+		// console.log(e.target.value)
+		setValue(e.target.value)
 	}
 
 	return (
@@ -22,12 +23,12 @@ const EditTextForm = ({ onBlur, text }) => {
 			className="Todo__item-editInput"
 			placeholder="Текст задачи"
 			value={value}
-			onChange={onChangeHandler}
+			onChange={onChange}
 			onBlur={blurHandler}
 			autoFocus
 		/>
 	)
-}
+})
 
 const EditStatusCheckbox = memo(({ onChange, status }) => {
 	const onChangeHandler = (val) => {
@@ -70,8 +71,8 @@ const TodoItem = ({ id, username, email, text, status }) => {
 						onBlur={editHandler}
 						text={text}
 					/>
-					)
-				}
+				)
+			}
 			</div>
 
 			<div className="Todo__item-status">

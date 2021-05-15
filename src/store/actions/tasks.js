@@ -77,9 +77,11 @@ export const editTask = (formData) => async dispatch => {
 	try {
 		const { data } = await tasksAPI.edit(formData)
 
-		if (data.status === 'ok') {
-			dispatch(setEditTask(formData))
-		}
+		if (data.status !== 'ok') return window.flash(data.message.token, 'error')
+			
+		window.flash('Задача изменена!', 'success')
+		dispatch(setEditTask(formData))
+		
 		
 	} catch (error) {
 		

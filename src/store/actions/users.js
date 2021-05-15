@@ -16,16 +16,15 @@ export const login = (formData) => async dispatch => {
 	try {
 		const { data } = await usersAPI.login(formData)
 		
-		if (data.status === 'ok') {
-			const token = data.message.token
-			
-			localStorage.setItem('token', token)	// это плохо, но вариантов мало
-			dispatch(setIsAuth(true))
-		}
+		if (data.status !== 'ok') return window.flash(data.message.password, 'error')
+		
+		const token = data.message.token
+		localStorage.setItem('token', token)	// это плохо, но вариантов мало
+		window.flash('Вы успешно авторизованы!', 'success')
+		dispatch(setIsAuth(true))
 		
 	} catch (error) {
-		
-		
+		console.error(error)
 	} finally {
 		dispatch(setIsFetching(false))
 	}
