@@ -1,19 +1,21 @@
 import { memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-// import { useHistory } from 'react-router-dom'
 
-import { setSortField } from '../../../../store/actions/tasks'
+import { setSortField, setSortDirection } from '../../../../store/actions/tasks'
 import Select from '../../../../components/Select'
 
 const Sorting = () => {
+	console.log('RENDER')
 	const dispatch = useDispatch()
 	const sort_field = useSelector(state => state.tasks.sort_field)
-	// const [value, setValue] = useState(page)
-	// const history = useHistory()
+	const sort_direction = useSelector(state => state.tasks.sort_direction)
 
-	const onSelect = (data) => {
+	const onSelectField = (data) => {
 		dispatch(setSortField(data))
-		// console.log(data)
+	}
+
+	const onSelectDirection = (data) => {
+		dispatch(setSortDirection(data))
 	}
 
 	return (
@@ -28,7 +30,7 @@ const Sorting = () => {
 						{title: 'E-mail', value: 'email'},
 						{title: 'Статус', value: 'status'},
 					]}
-					onSelect={onSelect}
+					onSelect={onSelectField}
 					defaultValue={sort_field}
 				/>
 			</div>
@@ -37,9 +39,11 @@ const Sorting = () => {
 				<label>Направление: </label>
 				<Select 
 					optionsData={[
-						{title: 'Сначала новые', value: 'desc'},
-						{title: 'Сначала старые', value: 'asc'},
+						{title: 'По убыванию', value: 'desc'},
+						{title: 'По возрастанию', value: 'asc'},
 					]}
+					onSelect={onSelectDirection}
+					defaultValue={sort_direction}
 				/>
 			</div>
 		</div>

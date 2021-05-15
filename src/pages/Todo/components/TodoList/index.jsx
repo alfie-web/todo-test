@@ -13,15 +13,17 @@ const TodoList = () => {
 	// console.log('RENDER')
 	const history = useHistory()
 	const dispatch = useDispatch()
+	
+	const tasks = useSelector(state => state.tasks.tasks)
 	const page = useSelector(state => state.tasks.page)
 	const sort_field = useSelector(state => state.tasks.sort_field)
-	const tasks = useSelector(state => state.tasks.tasks)
+	const sort_direction = useSelector(state => state.tasks.sort_direction)
 	const isFetching = useSelector(state => state.tasks.isFetching)
 
 	useEffect(() => {
 		dispatch(fetchTasks())
-		history.push(`/?page=${page}&sort_field=${sort_field}`)
-	}, [dispatch, history, page, sort_field])
+		history.push(`/?page=${page}&sort_field=${sort_field}&sort_direction=${sort_direction}`)
+	}, [dispatch, history, page, sort_field, sort_direction])
 
    return (
 		<>

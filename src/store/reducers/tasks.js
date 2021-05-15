@@ -1,5 +1,5 @@
 import queryString from 'query-string'
-import { SET_ITEMS, SET_PAGE, SET_IS_FETCHING, SET_SORT_FIELD } from '../types/tasks'
+import { SET_ITEMS, SET_PAGE, SET_IS_FETCHING, SET_SORT_FIELD, SET_SORT_DIRECTION } from '../types/tasks'
 
 const urlParams = queryString.parse(window.location.search)
 
@@ -31,6 +31,9 @@ const tasksReducer = (state = initialState, { type, payload }) => {
 
 		case SET_SORT_FIELD:
 			return changeState(state, 'sort_field', payload)
+			
+		case SET_SORT_DIRECTION:
+			return changeState(state, 'sort_direction', payload)
 
 		case SET_IS_FETCHING:
 			return changeState(state, 'isFetching', payload)
