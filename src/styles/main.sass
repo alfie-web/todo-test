@@ -7,7 +7,7 @@
 	box-sizing: border-box
 
 ::selection 
-	background: rgba(0, 0, 0, .1)
+	background: $black
 	color: white
 
 body
@@ -23,8 +23,27 @@ h2
 
 .container
 	width: 97%
-	max-width: 980px
+	max-width: 1024px
 	margin: 0 auto
 
 .page
-	padding: 110px 0 50px
+	padding: 50px 0
+
+.box
+	display: flex
+	justify-content: space-between
+	align-items: center
+
+
+	
+.fadeInUp
+	transition: opacity .3s, transform .3s
+	animation: show .3s
+
+@keyframes show
+	0%
+		transform: translateY(30px)
+		opacity: 0
+	100%
+		transform: translateY(0)
+		opacity: 1
