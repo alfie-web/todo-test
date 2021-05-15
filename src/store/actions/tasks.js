@@ -6,7 +6,7 @@ const setItems = payload => ({
 	payload
 })
 
-const setPage = payload => ({
+export const setPage = payload => ({
 	type: SET_PAGE,
 	payload
 })
@@ -31,7 +31,7 @@ export const fetchTasks = () => async (dispatch, getState) => {
 				total_task_count: data.message.total_task_count,
 			}))
 
-			dispatch(setPage(page + 1))
+			// dispatch(setPage(page + 1))
 		}
 		
 	} catch (error) {

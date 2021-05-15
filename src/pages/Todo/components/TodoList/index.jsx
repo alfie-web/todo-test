@@ -4,29 +4,25 @@ import Preloader from '../../../../components/Preloader'
 
 import { fetchTasks } from '../../../../store/actions/tasks'
 import TodoItem from '../TodoItem'
-
+import TodoListHeader from '../TodoListHeader'
+import Pagination from '../Pagination'
 
 
 const TodoList = () => {
-	console.log('RENDER')
+	// console.log('RENDER')
 	const dispatch = useDispatch()
+	const page = useSelector(state => state.tasks.page)
 	const tasks = useSelector(state => state.tasks.tasks)
 	const isFetching = useSelector(state => state.tasks.isFetching)
 
 	useEffect(() => {
 		dispatch(fetchTasks())
-	}, [dispatch])
+	}, [dispatch, page])
 
    return (
 		<>
 			<div className="Todo__list">
-				<div className="Todo__list-header">
-					<div className="Todo__item-id">Id</div>
-					<div className="Todo__item-username">Имя пользователя</div>
-					<div className="Todo__item-email">E-mail</div>
-					<div className="Todo__item-text">Текст</div>
-					<div className="Todo__item-status">Статус</div>
-				</div>
+				<TodoListHeader />
 
 				<div className="Todo__list-items">
 					{ isFetching && <Preloader /> }
@@ -41,6 +37,8 @@ const TodoList = () => {
 						: null
 					}
 				</div>
+
+				<Pagination />
 			</div>
 		</>
 	)
