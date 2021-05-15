@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { editTask } from '../../../../store/actions/tasks'
 import Input from '../../../../components/Input'
+import Checkbox from '../../../../components/Checkbox'
 
-const TodoItemEditForm = ({ onBlur, text }) => {
+const EditTextForm = ({ onBlur, text }) => {
 	const [value, setValue] = useState(text)
 
 	const blurHandler = () => {
@@ -12,8 +13,8 @@ const TodoItemEditForm = ({ onBlur, text }) => {
 		onBlur({ prop: 'text', value })
 	}
 
-	const onChange = (e) => {
-		setValue(e.target.value)
+	const onChangeHandler = (e) => {
+		setValue(!!e.target.value)
 	}
 
 	return (
@@ -21,21 +22,34 @@ const TodoItemEditForm = ({ onBlur, text }) => {
 			className="Todo__item-editInput"
 			placeholder="Текст задачи"
 			value={value}
-			onChange={onChange}
+			onChange={onChangeHandler}
 			onBlur={blurHandler}
 			autoFocus
 		/>
 	)
 }
 
+const EditStatusCheckbox = memo(({ onChange, status }) => {
+	const onChangeHandler = (val) => {
+		onChange({ prop: 'status', value: val ? 10 : 0 })
+	}
+
+	return (
+		<Checkbox 
+			checked={status}
+			onChange={onChangeHandler}
+		/>
+	)
+})
+
 const TodoItem = ({ id, username, email, text, status }) => {
 	const dispatch = useDispatch()
 	const [isEdit, setIsEdit] = useState(false)
 
 	const editHandler = (data) => {
-		if (data) dispatch(editTask({ id, ...data }))
+		data && dispatch(editTask({ id, ...data }))
 
-		setIsEdit(false)
+		isEdit && setIsEdit(false)
 	}
 
 	const handleEditMode = () => setIsEdit(true)
@@ -52,7 +66,7 @@ const TodoItem = ({ id, username, email, text, status }) => {
 						<div className="Todo__item-text" onDoubleClick={handleEditMode}>{text}</div>
 					</>
 				) : (
-					<TodoItemEditForm 
+					<EditTextForm 
 						onBlur={editHandler}
 						text={text}
 					/>
@@ -60,9 +74,14 @@ const TodoItem = ({ id, username, email, text, status }) => {
 				}
 			</div>
 
-			<div className="Todo__item-status">{status}</div>
+			<div className="Todo__item-status">
+				<EditStatusCheckbox
+					status={status}
+					onChange={editHandler}
+				/>
+			</div>
 		</div>
 	)
 }
 
-export default TodoItem
+export default memo(TodoItem)

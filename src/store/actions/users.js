@@ -1,4 +1,3 @@
-import api from '../../api/'
 import usersAPI from '../../api/users'
 import { SET_IS_AUTH, SET_IS_FETCHING } from '../types/users'
 
