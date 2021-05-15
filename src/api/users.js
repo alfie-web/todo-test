@@ -1,16 +1,12 @@
 import api from './'
+import createFormData from '../helpers/createFormData'
+import formDataHeaders from './'
 
 const usersAPI = {
 	login: ({ username, password }) => {
-		const formData = new FormData()
-		formData.append('username', username)
-		formData.append('password', password)
+		const formData = createFormData({ username, password })
 
-		return api.post('/login', formData, {
-			headers: {
-				"Content-Type": "multipart/form-data"
-			}
-		})
+		return api.post('/login', formData, formDataHeaders)
 	}
 }
 

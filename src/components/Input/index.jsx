@@ -18,6 +18,7 @@ export default function Input({
    title = '',
 	minVal = '',
 	maxVal = '',
+   autoFocus = false
 }) {
    return (
       <div className={clsx('Input', className)} title={title}>
@@ -36,6 +37,7 @@ export default function Input({
             onKeyPress={onKeyPress}
 				min={minVal}
 				max={maxVal}
+            autoFocus={autoFocus}
          />
 
          {icon && <div className="Input__icon">{icon}</div>}

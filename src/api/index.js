@@ -8,4 +8,10 @@ const instance = axios.create({
   withCredentials: false
 })
 
+export const formDataHeaders = {
+	headers: {
+		"Content-Type": "multipart/form-data"
+	}
+}
+
 export default instance
