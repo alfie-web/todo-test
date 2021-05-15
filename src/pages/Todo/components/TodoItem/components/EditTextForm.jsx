@@ -1,7 +1,9 @@
 import { memo, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Input from '../../../../../components/Input'
 
 const EditTextForm = memo(({ onBlur, text }) => {
+	const isFetching = useSelector(state => state.tasks.isFetching)
 	const [value, setValue] = useState(String(text))
 
 	const onBlurHandler = () => {
@@ -12,7 +14,7 @@ const EditTextForm = memo(({ onBlur, text }) => {
 		setValue(e.target.value)
 	}
 
-	return (
+	return !isFetching && (
 		<Input 
 			className="Todo__item-editInput"
 			placeholder="Текст задачи"

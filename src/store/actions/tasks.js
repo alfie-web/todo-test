@@ -1,35 +1,15 @@
+import actionCreator from '../../helpers/actionCreator'
 import tasksAPI from '../../api/tasks'
 import { SET_ITEMS, SET_PAGE, SET_IS_FETCHING, SET_SORT_FIELD, SET_SORT_DIRECTION, SET_EDIT_TASK } from '../types/tasks'
 
-const setItems = payload => ({
-	type: SET_ITEMS,
-	payload
-})
+export const setItems = payload => actionCreator(SET_ITEMS, payload)
 
-export const setPage = payload => ({
-	type: SET_PAGE,
-	payload
-})
+export const setPage = payload => actionCreator(SET_PAGE, payload)
+export const setSortField = payload => actionCreator(SET_SORT_FIELD, payload)
+export const setSortDirection = payload => actionCreator(SET_SORT_DIRECTION, payload)
 
-export const setSortField = payload => ({
-	type: SET_SORT_FIELD,
-	payload
-})
-
-export const setSortDirection = payload => ({
-	type: SET_SORT_DIRECTION,
-	payload
-})
-
-const setEditTask = ({ id, text, status }) => ({
-	type: SET_EDIT_TASK,
-	payload: { id, text, status }
-})
-
-const setIsFetching = (isFetching) => ({
-	type: SET_IS_FETCHING,
-	payload: isFetching
-})
+const setEditTask = payload => actionCreator(SET_EDIT_TASK, payload)
+const setIsFetching = (payload) => actionCreator(SET_IS_FETCHING, payload)
 
 
 export const fetchTasks = () => async (dispatch, getState) => {
@@ -61,19 +41,18 @@ export const createNewTask = (formData) => async dispatch => {
 		const { data } = await tasksAPI.create(formData)
 
 		if (data.status === 'ok') {
-			// dispatch(addNewItem(data.message))
 			dispatch(fetchTasks())
 		}
 		
 	} catch (error) {
-		
+		console.error(error)
 	} finally {
 		dispatch(setIsFetching(false))
 	}
 } 
 
 export const editTask = (formData) => async dispatch => {
-	// dispatch(setIsFetching(true))
+	dispatch(setIsFetching(true))
 	try {
 		const { data } = await tasksAPI.edit(formData)
 
@@ -83,9 +62,9 @@ export const editTask = (formData) => async dispatch => {
 		dispatch(setEditTask(formData))
 		
 	} catch (error) {
-		
+		console.error(error)
 	} 
-	// finally {
-	// 	dispatch(setIsFetching(false))
-	// }
+	finally {
+		dispatch(setIsFetching(false))
+	}
 } 
