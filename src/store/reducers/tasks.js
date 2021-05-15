@@ -8,8 +8,8 @@ const initialState = {
 	total_task_count: null,
 	isFetching: false,
 	page: urlParams.page ? +urlParams.page : 1,
-	sort_direction: urlParams.sort_direction ? urlParams.sort_direction : 'asc',
-	sort_field: urlParams.sort_field ? urlParams.sort_field : 'id',
+	sort_direction: urlParams.sort_direction ?? 'asc',
+	sort_field: urlParams.sort_field ?? 'id',
 }
 
 const changeState = (state, prop, value) => ({

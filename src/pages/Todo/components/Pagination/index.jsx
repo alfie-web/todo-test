@@ -1,6 +1,6 @@
 import { memo, useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 
 import { setPage } from '../../../../store/actions/tasks'
 import Input from '../../../../components/Input'
@@ -9,7 +9,7 @@ const Pagination = () => {
 	const dispatch = useDispatch()
 	const page = useSelector(state => state.tasks.page)
 	const [value, setValue] = useState(page)
-	const history = useHistory()
+	// const history = useHistory()
 
 	const onChange = (e) => {
 		if (+e.target.value <= 0) return	// запрещает ввод отрицательных чисел
@@ -20,9 +20,10 @@ const Pagination = () => {
 		if (e.code !== 'Enter') return 
 
 		dispatch(setPage(+value))
-		history.push(`/?page=${value}`)
+		// history.push(`/?page=${value}`)
 
-	}, [dispatch, value, history])
+	}, [dispatch, value])
+	// }, [dispatch, value, history])
 
 	useEffect(() => {
 		window.addEventListener('keypress', onPageSelect)

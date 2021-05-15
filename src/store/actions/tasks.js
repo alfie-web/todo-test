@@ -1,5 +1,5 @@
 import tasksAPI from '../../api/tasks'
-import { SET_ITEMS, SET_PAGE, SET_IS_FETCHING } from '../types/tasks'
+import { SET_ITEMS, SET_PAGE, SET_IS_FETCHING, SET_SORT_FIELD } from '../types/tasks'
 
 const setItems = payload => ({
 	type: SET_ITEMS,
@@ -8,6 +8,11 @@ const setItems = payload => ({
 
 export const setPage = payload => ({
 	type: SET_PAGE,
+	payload
+})
+
+export const setSortField = payload => ({
+	type: SET_SORT_FIELD,
 	payload
 })
 

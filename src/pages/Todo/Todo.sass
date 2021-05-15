@@ -1,6 +1,19 @@
 @import '../../styles/vars'
 
 .Todo
+	&__sorting
+		display: flex
+
+		&-select
+			display: flex
+			margin-left: 30px
+
+			&:first-child
+				margin-left: 0
+
+			.Select
+				margin-left: 10px
+
 	&__list
 		margin-top: 20px
 		width: 100%
@@ -15,27 +28,33 @@
 	&__item, &__list-header
 		display: flex
 		align-items: center
+		justify-content: space-between
 		width: 100%
-		padding: 20px 30px 
+		padding: 20px 50px 20px 30px 
 
 	&__item
 		&:nth-child(odd)
 			background-color: $light
 
 		&-id
-			width: 10%
+			width: 12%
+			min-width: 70px
 
-		&-username
-			width: 20%
-
-		&-email
-			width: 25%
+		&-center
+			flex: 1
+			padding-right: 30px
 
 		&-text
-			width: 35%
+			font-size: 20px
+			margin-top: 5px
 
-		&-status
-			width: 10%
+		&-userinfo
+			display: flex
+			font-size: 14px
+			color: $gray
+			transform: translateY(-2px)
+
+		// &-status
 
 
 	&__pagination
