@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 import './Checkbox.sass'
 
-const Checkbox = ({ className, label, checked = false, onChange }) => {
+const Checkbox = ({ className, label, checked = false, onChange, disabled = false }) => {
    const changeHandler = () => {
       onChange(!checked)
    }
@@ -13,6 +13,7 @@ const Checkbox = ({ className, label, checked = false, onChange }) => {
             <div
                className={clsx('Checkbox__wrap', {
                   'Checkbox__wrap--checked': checked,
+                  'Checkbox__wrap--disabled': disabled,
                })}
                onClick={changeHandler}
             >
