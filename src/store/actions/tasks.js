@@ -21,9 +21,9 @@ export const setSortDirection = payload => ({
 	payload
 })
 
-const setEditTask = ({ id, prop, value }) => ({
+const setEditTask = ({ id, text, status }) => ({
 	type: SET_EDIT_TASK,
-	payload: { id, prop, value }
+	payload: { id, text, status }
 })
 
 const setIsFetching = (isFetching) => ({
@@ -81,7 +81,6 @@ export const editTask = (formData) => async dispatch => {
 			
 		window.flash('Задача изменена!', 'success')
 		dispatch(setEditTask(formData))
-		
 		
 	} catch (error) {
 		

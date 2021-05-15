@@ -27,7 +27,6 @@ const NewTaskFormBtn = () => {
 }
 
 const NewTaskForm = () => {
-	console.log('RENDERS')
 	const dispatch = useDispatch()
 	const { register, handleSubmit, formState: { errors } } = useForm({
       resolver: yupResolver(validationSchema),

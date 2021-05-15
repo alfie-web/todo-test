@@ -40,7 +40,8 @@ const tasksReducer = (state = initialState, { type, payload }) => {
 					if (t.id === payload.id) {
 						return {
 							...t,
-							[payload.prop]: payload.value
+							text: payload.text,
+							status: payload.status,
 						}
 					}
 					return t

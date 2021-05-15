@@ -9,9 +9,10 @@ const tasksAPI = {
 
 		return api.post('/create', formData, formDataHeaders)
 	},
-	edit: ({ id, prop, value }) => {
+	edit: ({ id, text, status }) => {
 		const formData = createFormData({
-			[prop]: value,
+			text,
+			status,
 			token: window.localStorage.getItem('token')
 		})
 
