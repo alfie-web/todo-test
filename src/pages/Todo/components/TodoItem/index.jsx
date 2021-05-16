@@ -15,11 +15,13 @@ const TodoItem = ({ id, username, email, text, status }) => {
       if (editedData.prop === 'text') {
          if (status === 0) newStatus = 1
          if (status === 10) newStatus = 11
-   
-         editedData.value !== text && dispatch(editTask({ id, text: editedData.value, status: newStatus }))
-         
-         setIsEdit(false)
 
+         editedData.value !== text &&
+            dispatch(
+               editTask({ id, text: editedData.value, status: newStatus })
+            )
+
+         setIsEdit(false)
       } else {
          if (status === 0) newStatus = 10
          if (status === 10) newStatus = 0
@@ -39,9 +41,15 @@ const TodoItem = ({ id, username, email, text, status }) => {
          <div className="Todo__item-center">
             {!isEdit ? (
                <>
-                  <span className="Todo__item-userinfo">
-                     {username} ({email})
-                  </span>
+                  <div className="Todo__item-userinfo">
+                     <span>{username}</span>
+                     <span>({email})</span>
+                     <span>
+                        {status === 1 || status === 11
+                           ? 'Отредактировано администратором'
+                           : ''}
+                     </span>
+                  </div>
                   <div
                      className="Todo__item-text"
                      onDoubleClick={handleEditMode}

@@ -13,21 +13,22 @@ const validationSchema = yup.object().shape({
 })
 
 const AuthFormBtn = () => {
-	// const isFetching = useSelector(state => state.tasks.isFetching)
-
-	return (
-		<Button 
-			text="Войти"
-			variant="black"
-			type="submit"
-			// disabled={isFetching}
-		/>
-	)
+   return (
+      <Button
+         text="Войти"
+         variant="black"
+         type="submit"
+      />
+   )
 }
 
 const AuthForm = () => {
-	const dispatch = useDispatch()
-	const { register, handleSubmit, formState: { errors } } = useForm({
+   const dispatch = useDispatch()
+   const {
+      register,
+      handleSubmit,
+      formState: { errors },
+   } = useForm({
       resolver: yupResolver(validationSchema),
    })
 
@@ -35,38 +36,38 @@ const AuthForm = () => {
       dispatch(login(data))
    }
 
-	return (
-		<form className="Auth__form" onSubmit={handleSubmit(onSubmit)}>
-			<div className="Todo__newTaskForm-input Input">
-				<input
-					name="username"
-					placeholder="Ваше имя"
-					defaultValue=""
-					{...register("username")}
-				/>
+   return (
+      <form className="Auth__form" onSubmit={handleSubmit(onSubmit)}>
+         <div className="Todo__newTaskForm-input Input">
+            <input
+               name="username"
+               placeholder="Ваше имя"
+               defaultValue=""
+               {...register('username')}
+            />
 
-				{ errors.username && <div className="Input__error-msg">
-					Поле обязательно
-				</div> }
-			</div>
+            {errors.username && (
+               <div className="Input__error-msg">Поле обязательно</div>
+            )}
+         </div>
 
-			<div className="Todo__newTaskForm-input Input">
-				<input
-					name="password"
-					placeholder="Ваш пароль"
-					defaultValue=""
-					type="password"
-					{...register("password")}
-				/>
+         <div className="Todo__newTaskForm-input Input">
+            <input
+               name="password"
+               placeholder="Ваш пароль"
+               defaultValue=""
+               type="password"
+               {...register('password')}
+            />
 
-				{ errors.password && <div className="Input__error-msg">
-					Поле обязательно
-				</div> }
-			</div>
+            {errors.password && (
+               <div className="Input__error-msg">Поле обязательно</div>
+            )}
+         </div>
 
-			<AuthFormBtn />
-		</form>
-	)
+         <AuthFormBtn />
+      </form>
+   )
 }
 
 export default memo(AuthForm)

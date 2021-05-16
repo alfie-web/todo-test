@@ -16,13 +16,11 @@ export default memo(function Select({
    const [isDropped, setIsDropped] = useState(false)
    const selectRef = useRef()
 
-   // console.log('MONTH_SELECT_RENDER')
-
    useEffect(() => {
       if (defaultValue) setValue(defaultValue)
    }, [defaultValue])
 
-   useOutsideClick(selectRef, () => setIsDropped(false), '.Select__dropdown');
+   useOutsideClick(selectRef, () => setIsDropped(false), '.Select__dropdown')
 
    const handleSelect = (val) => {
       setValue(val)

@@ -14,21 +14,25 @@ const validationSchema = yup.object().shape({
 })
 
 const NewTaskFormBtn = () => {
-	const isFetching = useSelector(state => state.tasks.isFetching)
+   const isFetching = useSelector((state) => state.tasks.isFetching)
 
-	return (
-		<Button 
-			text="Создать"
-			variant="black"
-			type="submit"
-			disabled={isFetching}
-		/>
-	)
+   return (
+      <Button
+         text="Создать"
+         variant="black"
+         type="submit"
+         disabled={isFetching}
+      />
+   )
 }
 
 const NewTaskForm = () => {
-	const dispatch = useDispatch()
-	const { register, handleSubmit, formState: { errors } } = useForm({
+   const dispatch = useDispatch()
+   const {
+      register,
+      handleSubmit,
+      formState: { errors },
+   } = useForm({
       resolver: yupResolver(validationSchema),
    })
 
@@ -36,54 +40,54 @@ const NewTaskForm = () => {
       dispatch(createNewTask(data))
    }
 
-	return (
-		<form className="Todo__newTaskForm" onSubmit={handleSubmit(onSubmit)}>
-			<div className="Todo__newTaskForm-top">
-				<div className="Todo__newTaskForm-input Input">
-					<input
-						name="text"
-						placeholder="Новая задача"
-						defaultValue=""
-						{...register("text")}
-					/>
+   return (
+      <form className="Todo__newTaskForm" onSubmit={handleSubmit(onSubmit)}>
+         <div className="Todo__newTaskForm-top">
+            <div className="Todo__newTaskForm-input Input">
+               <input
+                  name="text"
+                  placeholder="Новая задача"
+                  defaultValue=""
+                  {...register('text')}
+               />
 
-					{ errors.text && <div className="Input__error-msg">
-						Поле обязательно
-					</div> }
-				</div>
-			</div>
+               {errors.text && (
+                  <div className="Input__error-msg">Поле обязательно</div>
+               )}
+            </div>
+         </div>
 
-			<div className="Todo__newTaskForm-bottom">
-				<div className="Todo__newTaskForm-input Input">
-					<input
-						name="username"
-						placeholder="Ваше имя"
-						defaultValue=""
-						{...register("username")}
-					/>
+         <div className="Todo__newTaskForm-bottom">
+            <div className="Todo__newTaskForm-input Input">
+               <input
+                  name="username"
+                  placeholder="Ваше имя"
+                  defaultValue=""
+                  {...register('username')}
+               />
 
-					{ errors.username && <div className="Input__error-msg">
-						Поле обязательно
-					</div> }
-				</div>
+               {errors.username && (
+                  <div className="Input__error-msg">Поле обязательно</div>
+               )}
+            </div>
 
-				<div className="Todo__newTaskForm-input Input">
-					<input
-						name="email"
-						placeholder="Ваше E-mail"
-						defaultValue=""
-						{...register("email")}
-					/>
+            <div className="Todo__newTaskForm-input Input">
+               <input
+                  name="email"
+                  placeholder="Ваше E-mail"
+                  defaultValue=""
+                  {...register('email')}
+               />
 
-					{ errors.email && <div className="Input__error-msg">
-						Поле обязательно
-					</div> }
-				</div>
+               {errors.email && (
+                  <div className="Input__error-msg">Поле обязательно</div>
+               )}
+            </div>
 
-				<NewTaskFormBtn />
-			</div>
-		</form>
-	)
+            <NewTaskFormBtn />
+         </div>
+      </form>
+   )
 }
 
 export default memo(NewTaskForm)

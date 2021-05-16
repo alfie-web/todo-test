@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import './Input.sass'
 
 export default function Input({
-	idAttr = '',
+   idAttr = '',
    value,
    onChange,
    onFocus,
@@ -16,14 +16,14 @@ export default function Input({
    placeholder,
    icon,
    title = '',
-	minVal = '',
-	maxVal = '',
-   autoFocus = false
+   minVal = '',
+   maxVal = '',
+   autoFocus = false,
 }) {
    return (
       <div className={clsx('Input', className)} title={title}>
          <input
-				id={idAttr}
+            id={idAttr}
             type={type}
             className="Input__element"
             autoComplete="off"
@@ -35,8 +35,8 @@ export default function Input({
             onFocus={onFocus}
             onBlur={onBlur}
             onKeyPress={onKeyPress}
-				min={minVal}
-				max={maxVal}
+            min={minVal}
+            max={maxVal}
             autoFocus={autoFocus}
          />
 

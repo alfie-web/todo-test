@@ -12,7 +12,7 @@ window.flash = (message, type = 'success', position = 'top-right') =>
 function App() {
    return (
       <>
-       <Flash />
+         <Flash />
          <div className="App">
             <Header />
 
