@@ -1,5 +1,5 @@
 import { useState, memo } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { editTask } from '../../../../store/actions/tasks'
 import EditTextForm from './components/EditTextForm'
@@ -7,6 +7,7 @@ import EditStatusCheckbox from './components/EditStatusCheckbox'
 
 const TodoItem = ({ id, username, email, text, status }) => {
    const dispatch = useDispatch()
+   const isAuth = useSelector((state) => state.users.isAuth)
    const [isEdit, setIsEdit] = useState(false)
 
    const editHandler = (editedData) => {
@@ -39,7 +40,9 @@ const TodoItem = ({ id, username, email, text, status }) => {
          <div className="Todo__item-id">{id}</div>
 
          <div className="Todo__item-center">
-            {!isEdit ? (
+            {isEdit && isAuth ? (
+               <EditTextForm text={text} onBlur={editHandler} /> 
+            ) : (
                <>
                   <div className="Todo__item-userinfo">
                      <span>{username}</span>
@@ -57,8 +60,6 @@ const TodoItem = ({ id, username, email, text, status }) => {
                      {text}
                   </div>
                </>
-            ) : (
-               <EditTextForm text={text} onBlur={editHandler} />
             )}
          </div>
 

@@ -1,4 +1,5 @@
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import eventEmitter from './helpers/eventEmitter'
 
 import Flash from './components/Flash'
@@ -9,18 +10,44 @@ import AuthPage from './pages/Auth'
 window.flash = (message, type = 'success', position = 'top-right') =>
    eventEmitter.emit('flash', { message, type, position })
 
-function App() {
+const ROUTES = [
+   { path: '/', component: TodoPage },
+   { path: '/auth', component: AuthPage, auth: false },
+]
+
+
+const Routes = ({ routes }) => {
+   const isAuth = useSelector(state => state.users.isAuth)
+
+   return (
+      <Switch>
+         {routes.map(
+            (route, i) =>
+               (route.auth === isAuth || !route.hasOwnProperty('auth')) && (
+                  <Route
+                     key={i}
+                     exact
+                     path={route.path}
+                     component={route.component}
+                  />
+               )
+         )}
+         <Redirect from="*" to="/" />
+      </Switch>
+   )
+}
+
+const App = () => {
    return (
       <>
          <Flash />
+
          <div className="App">
             <Header />
 
-            <Switch>
-               <Route exact path="/" component={TodoPage} />
-               <Route exact path="/auth" component={AuthPage} />
-               <Redirect from="*" to="/" />
-            </Switch>
+            <Routes
+               routes={ROUTES}
+            />
          </div>
       </>
    )
