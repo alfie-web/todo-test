@@ -2,7 +2,7 @@ import actionCreator from '../../helpers/actionCreator'
 import usersAPI from '../../api/users'
 import { SET_IS_AUTH, SET_IS_FETCHING } from '../types/users'
 
-const setIsAuth = payload => actionCreator(SET_IS_AUTH, payload)
+export const setIsAuth = payload => actionCreator(SET_IS_AUTH, payload)
 const setIsFetching = payload => actionCreator(SET_IS_FETCHING, payload)
 
 export const login = (formData) => async (dispatch) => {
@@ -21,4 +21,10 @@ export const login = (formData) => async (dispatch) => {
    } finally {
       dispatch(setIsFetching(false))
    }
+}
+
+export const logout = () => dispatch => {
+   window.flash('Вы вышли из профиля!', 'success')
+   localStorage.removeItem('token')
+   dispatch(setIsAuth(false))
 }
