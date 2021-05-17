@@ -1,3 +1,3 @@
 ## Todo - тестовое задание
 
-[Демка](http://testtodozzz.zzz.com.ua/)
+[Демка](https://app-todozzz.herokuapp.com)
